@@ -1077,6 +1077,8 @@ class Pipeline:
                     import torch
                     if torch.cuda.is_available():
                         try:
+                            del model
+                            gc.collect()
                             torch.cuda.empty_cache()
                         except: 
                             print("Warning: not able to clear GPU cache.")
@@ -1229,6 +1231,8 @@ class Pipeline:
             import torch
             if torch.cuda.is_available():
                 try:
+                    del model
+                    gc.collect()
                     torch.cuda.empty_cache()
                 except: 
                     print("Warning: not able to clear GPU cache.")
