@@ -1077,9 +1077,14 @@ class Pipeline:
                     import torch
                     if torch.cuda.is_available():
                         try:
-                            del model
-                            gc.collect()
-                            torch.cuda.empty_cache()
+                            # del model
+                            # gc.collect()
+                            # torch.cuda.empty_cache()
+                            from numba import cuda
+                            cuda.select_device(0)
+                            cuda.close()
+                            print("cached memory: ", torch.cuda.memory_cached())
+                            print("allocated memory: ", torch.cuda.memory_allocated())
                         except: 
                             print("Warning: not able to clear GPU cache.")
             # Close cached readers.
@@ -1231,9 +1236,14 @@ class Pipeline:
             import torch
             if torch.cuda.is_available():
                 try:
-                    del model
-                    gc.collect()
-                    torch.cuda.empty_cache()
+                    # del model
+                    # gc.collect()
+                    # torch.cuda.empty_cache()
+                    from numba import cuda
+                    cuda.select_device(0)
+                    cuda.close()
+                    print("cached memory: ", torch.cuda.memory_cached())
+                    print("allocated memory: ", torch.cuda.memory_allocated())
                 except: 
                     print("Warning: not able to clear GPU cache.")
 
