@@ -1081,7 +1081,7 @@ class Pipeline:
                         except: 
                             print("Warning: not able to clear GPU cache.")
                         finally: 
-                            print("cached memory: ", torch.cuda.memory_cached())
+                            print("cached memory: ", torch.cuda.memory_reserved())
                             print("allocated memory: ", torch.cuda.memory_allocated())
             # Close cached readers.
             # This may play a big role with cluster deployments or long standing jobs
