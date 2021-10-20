@@ -1077,13 +1077,12 @@ class Pipeline:
                     import torch
                     if torch.cuda.is_available():
                         try:
-                            del model
-                            gc.collect()
                             torch.cuda.empty_cache()
-                            print("cached memory: ", torch.cuda.memory_cached())
-                            print("allocated memory: ", torch.cuda.memory_allocated())
                         except: 
                             print("Warning: not able to clear GPU cache.")
+                        finally: 
+                            print("cached memory: ", torch.cuda.memory_cached())
+                            print("allocated memory: ", torch.cuda.memory_allocated())
             # Close cached readers.
             # This may play a big role with cluster deployments or long standing jobs
             # by freeing up memory and resources.
@@ -1233,13 +1232,12 @@ class Pipeline:
             import torch
             if torch.cuda.is_available():
                 try:
-                    del model
-                    gc.collect()
                     torch.cuda.empty_cache()
-                    print("cached memory: ", torch.cuda.memory_cached())
-                    print("allocated memory: ", torch.cuda.memory_allocated())
                 except: 
                     print("Warning: not able to clear GPU cache.")
+                finally: 
+                    print("cached memory: ", torch.cuda.memory_cached())
+                    print("allocated memory: ", torch.cuda.memory_allocated())
 
         return Workspace(
             self, None, measurements, object_set, measurements, None, outlines=outlines
